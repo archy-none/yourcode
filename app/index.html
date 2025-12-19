@@ -12,15 +12,15 @@
         <div id="root"></div>
 
         <script type="text/babel">
-            async function Post({ postData }) {
+            function Post({ postData }) {
                 let {
-                    ID: _,
+                    ID: id,
                     ACCOUNT: username,
                     TIME: unixepoc,
                     CONTENT: content,
                     LIKED: liked,
                     RELATED: related,
-                } = data;
+                } = postData;
                 marked.use({ gfm: true, breaks: true });
                 return (
                     <div style={{ margin: "50px" }}>
