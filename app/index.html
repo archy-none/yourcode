@@ -27,6 +27,14 @@
                         <h1>{username}</h1>
                         <p>{formatDate(unixepoc)}</p>
                         <div>{content}</div>
+                        {related !== null ? (
+                            <p>
+                                Reply to
+                                <a href={`/#${related}`}>{related}</a>
+                            </p>
+                        ) : (
+                            <p></p>
+                        )}
                         <button onClick={() => likePost(id)}>
                             Like {liked}
                         </button>
