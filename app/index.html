@@ -2,17 +2,14 @@
 <html>
     <head>
         <title>Yourcode</title>
-        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
         <script src="api.js"></script>
     </head>
     <body>
         <div id="root"></div>
 
-        <script type="text/babel">
-            function Post({ postData }) {
+        <script>
+            function post(postData) {
                 let {
                     ID: id,
                     ACCOUNT: username,
@@ -22,29 +19,28 @@
                     RELATED: related,
                 } = postData;
                 marked.use({ gfm: true, breaks: true });
-                return (
-                    <div style={{ margin: "50px" }}>
-                        <h1>{username}</h1>
-                        <p>{formatDate(unixepoc)}</p>
-                        <div>{content}</div>
-                        {related !== null ? (
-                            <p>
-                                Reply to
-                                <a href={`/#${related}`}>{related}</a>
-                            </p>
-                        ) : (
-                            <p></p>
-                        )}
-                        <button onClick={() => likePost(id)}>
-                            Like {liked}
+                return `
+                    <div>
+                        <h1>${username}</h1>
+                        <p>${formatDate(unixepoc)}</p>
+                        <div>${content}</div>
+                        ${(() => {
+                            if (related !== null) {
+                                return `<p>Reply to<a href="#${related}">${related}</a></p>`;
+                            } else {
+                                return "";
+                            }
+                        })()}
+                        <button onclick="likePost(${"`" + id + "`"})">
+                            Like ${liked}
                         </button>
                     </div>
-                );
+                `;
             }
 
-            const root = ReactDOM.createRoot(document.getElementById("root"));
+            const root = document.getElementById("root");
             viewPost(window.location.hash.substring(1)).then((data) => {
-                root.render(<Post postData={data} />);
+                root.innerHTML = post(data);
             });
         </script>
     </body>
