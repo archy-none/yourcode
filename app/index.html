@@ -22,7 +22,7 @@
                     <div　class="post">
                         <h1>${username}</h1>
                         <p>${formatDate(unixepoc)}</p>
-                        <div>${content}</div>
+                        <div>${md.parse(content)}</div>
                         ${(() => {
                             if (related !== null) {
                                 return `<p>Reply to <a href="#${related}">${related}</a></p>`;
