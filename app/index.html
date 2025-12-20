@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="ja">
     <head>
         <title>Yourcode</title>
         <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -9,15 +9,14 @@
         <div id="root"></div>
 
         <script>
-            function post(postData) {
-                let {
-                    ID: id,
-                    ACCOUNT: username,
-                    TIME: unixepoc,
-                    CONTENT: content,
-                    LIKED: liked,
-                    RELATED: related,
-                } = postData;
+            function post({
+                ID: id,
+                ACCOUNT: username,
+                TIME: unixepoc,
+                CONTENT: content,
+                LIKED: liked,
+                RELATED: related,
+            }) {
                 marked.use({ gfm: true, breaks: true });
                 return `
                     <div>
@@ -26,7 +25,7 @@
                         <div>${content}</div>
                         ${(() => {
                             if (related !== null) {
-                                return `<p>Reply to<a href="#${related}">${related}</a></p>`;
+                                return `<p>Reply to <a href="#${related}">${related}</a></p>`;
                             } else {
                                 return "";
                             }
