@@ -11,7 +11,7 @@
         <div id="root"></div>
 
         <script>
-            function post({
+            function view({
                 ID: id,
                 ACCOUNT: username,
                 TIME: unixepoc,
@@ -21,13 +21,34 @@
             }) {
                 marked.use({ gfm: true, breaks: true });
                 return `
-                    <div class="post">
+                    <div class="view">
                         <div>${marked.parse(content)}</div>
                         <p>${username} - ${formatDate(unixepoc)}</p>
                         <p>
                           <button onclick="likePost('${id}')">Like ${liked}</button>
                           <span>Reply to <a href="#${related}">${related}</a></span>
                         </p>
+                    </div>
+                `;
+            }
+
+            function post({
+                ID: id,
+                ACCOUNT: username,
+                TIME: unixepoc,
+                CONTENT: content,
+                LIKED: liked,
+                RELATED: related,
+            }) {
+                function send() {
+                    let content = document.getElementById("content");
+                    createPost(content.value);
+                }
+
+                return `
+                    <div class="post">
+                        <textarea id="content"></textarea>
+                        <button onclick="send()">Send</button>
                     </div>
                 `;
             }
