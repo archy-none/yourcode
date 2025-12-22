@@ -21,7 +21,7 @@
             }) {
                 marked.use({ gfm: true, breaks: true });
                 return `
-                    <div　class="post">
+                    <div class="post">
                         <h1>${username}</h1>
                         <p>${formatDate(unixepoc)}</p>
                         <div>${marked.parse(content)}</div>
