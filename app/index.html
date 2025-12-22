@@ -22,19 +22,20 @@
                 marked.use({ gfm: true, breaks: true });
                 return `
                     <div class="post">
-                        <h1>${username}</h1>
-                        <p>${formatDate(unixepoc)}</p>
                         <div>${marked.parse(content)}</div>
-                        ${(() => {
-                            if (related !== null) {
-                                return `<p>Reply to <a href="#${related}">${related}</a></p>`;
-                            } else {
-                                return "";
-                            }
-                        })()}
-                        <button onclick="likePost('${id}')">
-                            Like ${liked}
-                        </button>
+                        <p>${username} - ${formatDate(unixepoc)}</p>
+                        <p>
+                          <button onclick="likePost('${id}')">
+                              Like ${liked}
+                          </button>
+                          ${(() => {
+                              if (related !== null) {
+                                  return `<span>Reply to <a href="#${related}">${related}</a></span>`;
+                              } else {
+                                  return "";
+                              }
+                          })()}
+                        </p>
                     </div>
                 `;
             }
