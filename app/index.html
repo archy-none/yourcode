@@ -25,16 +25,8 @@
                         <div>${marked.parse(content)}</div>
                         <p>${username} - ${formatDate(unixepoc)}</p>
                         <p>
-                          <button onclick="likePost('${id}')">
-                              Like ${liked}
-                          </button>
-                          ${(() => {
-                              if (related !== null) {
-                                  return `<span>Reply to <a href="#${related}">${related}</a></span>`;
-                              } else {
-                                  return "";
-                              }
-                          })()}
+                          <button onclick="likePost('${id}')">Like ${liked}</button>
+                          <span>Reply to <a href="#${related}">${related}</a></span>
                         </p>
                     </div>
                 `;
