@@ -32,17 +32,11 @@
                 `;
             }
 
-            function post({
-                ID: id,
-                ACCOUNT: username,
-                TIME: unixepoc,
-                CONTENT: content,
-                LIKED: liked,
-                RELATED: related,
-            }) {
-                function send() {
+            function post() {
+                async function send() {
                     let content = document.getElementById("content");
-                    createPost(content.value);
+                    let id = await createPost(content.value);
+                    window.location.href = `#${id.id}`;
                 }
                 window.send = send;
 
@@ -56,7 +50,7 @@
 
             const root = document.getElementById("root");
             viewPost(window.location.hash.substring(1)).then((data) => {
-                root.innerHTML = post(data);
+                root.innerHTML = view(data) + post();
             });
         </script>
     </body>
