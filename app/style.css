@@ -17,11 +17,11 @@ a {
     background-color: whitesmoke;
     textarea {
         margin: 0;
-        padding: 5%;
+        padding: 1%;
         border: none;
         background-color: lightgrey;
         resize: vertical;
-        width: 90%;
+        width: 98%;
     }
     p,
     div {
