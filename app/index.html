@@ -11,9 +11,11 @@
         <div id="root"></div>
 
         <script>
-            function handleError(res) {
+            function ok(res, callback = () => {}) {
                 if (res.error !== undefined) {
                     alert(res.error);
+                } else {
+                    callback();
                 }
             }
 
@@ -32,7 +34,7 @@
                         <p>${username} - ${formatDate(unixepoc)}</p>
                         <p>
                             <button onclick="likePost('${id}')">Like ${liked}</button>
-                            <button onclick="deletePost('${id}')">Detele</button>
+                            <button onclick="ok(deletePost('${id}'))">Detele</button>
                             ${related != null ? `<span>Reply to <a href="#${related}">${related}</a></span>` : ""}
                         </p>
                     </div>
@@ -40,14 +42,15 @@
             }
 
             function post() {
-                function send() {
+                async function send() {
                     let content = document.getElementById("content");
                     let related = document.getElementById("related");
                     let replyTo = related.value.trim();
-                    (replyTo === ""
-                        ? createPost(content.value)
-                        : createPost(content.value, replyTo)
-                    ).then((res) => {
+                    let res =
+                        replyTo === ""
+                            ? await createPost(content.value)
+                            : await createPost(content.value, replyTo);
+                    ok(res, () => {
                         window.location.href = `#${res.id}`;
                     });
                 }
