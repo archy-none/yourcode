@@ -11,7 +11,11 @@
         <div id="root"></div>
 
         <script>
-            function handleError(res) {}
+            function handleError(res) {
+                if (res.error !== undefined) {
+                    alert(res.error);
+                }
+            }
 
             function view({
                 ID: id,
