@@ -19,6 +19,7 @@ a {
         margin: 0;
         padding: 1%;
         border: none;
+        height: 300px;
         background-color: lightgrey;
         resize: vertical;
         width: 98%;
