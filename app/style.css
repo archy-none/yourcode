@@ -13,16 +13,26 @@ a {
 }
 .post {
     margin: 10px;
-    padding: 10px;
+    max-width: 500px;
+    padding-top: 10px;
     border-radius: 10px;
     background-color: whitesmoke;
     textarea {
+        margin: 0;
+        padding: 0;
         border: none;
-        border: 1px solid grey;
-        border-radius: 10px;
+        background-color: lightgrey;
         resize: vertical;
         width: 100%;
     }
+    div {
+        padding: 10px;
+    }
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
 }
 
 button {
