@@ -11,6 +11,8 @@
         <div id="root"></div>
 
         <script>
+            function handleError(res) {}
+
             function view({
                 ID: id,
                 ACCOUNT: username,
@@ -25,36 +27,37 @@
                         <div>${marked.parse(content)}</div>
                         <p>${username} - ${formatDate(unixepoc)}</p>
                         <p>
-                          <button onclick="likePost('${id}')">Like ${liked}</button>
-                          <button onclick="deletePost('${id}')">Detele</button>
-                          ${related != null ? `<span>Reply to <a href="#${related}">${related}</a></span>` : ""}
+                            <button onclick="likePost('${id}')">Like ${liked}</button>
+                            <button onclick="deletePost('${id}')">Detele</button>
+                            ${related != null ? `<span>Reply to <a href="#${related}">${related}</a></span>` : ""}
                         </p>
                     </div>
                 `;
             }
 
             function post() {
-                async function send() {
+                function send() {
                     let content = document.getElementById("content");
                     let related = document.getElementById("related");
                     let replyTo = related.value.trim();
-                    let { id } =
-                        replyTo === ""
-                            ? await createPost(content.value)
-                            : await createPost(content.value, replyTo);
-                    window.location.href = `#${id}`;
+                    (replyTo === ""
+                        ? createPost(content.value)
+                        : createPost(content.value, replyTo)
+                    ).then((res) => {
+                        window.location.href = `#${res.id}`;
+                    });
                 }
                 window.send = send;
 
                 return `
                     <div class="post">
-                      <p>Create Post</p>
-                      <textarea id="content"></textarea>
-                      <div>
-                        <button onclick="send()">Send</button>
-                        <label>Reply to </label>
-                        <input id="related" type="text" />
-                      </div>
+                        <p>Create Post</p>
+                        <textarea id="content"></textarea>
+                        <div>
+                            <button onclick="send()">Send</button>
+                            <label>Reply to </label>
+                            <input id="related" type="text" />
+                        </div>
                     </div>
                 `;
             }
