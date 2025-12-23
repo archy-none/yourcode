@@ -1,10 +1,19 @@
 .view {
     margin: 10px;
     padding: 10px;
-    border-radius: 5px;
-    border: 1px solid grey;
+    border-radius: 10px;
     background-color: whitesmoke;
     div {
-        border-bottom: 1px solid grey;
+        border-bottom: 1px solid lightgrey;
     }
+}
+
+a {
+    color: lightskyblue;
+}
+
+button {
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
 }
