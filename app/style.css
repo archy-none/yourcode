@@ -11,6 +11,19 @@
 a {
     color: lightskyblue;
 }
+.post {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: whitesmoke;
+    textarea {
+        border: none;
+        border: 1px solid grey;
+        border-radius: 10px;
+        resize: vertical;
+        width: 100%;
+    }
+}
 
 button {
     border-radius: 10px;
