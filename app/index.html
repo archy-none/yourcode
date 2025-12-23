@@ -36,8 +36,12 @@
                 async function send() {
                     let content = document.getElementById("content");
                     let related = document.getElementById("related");
-                    let id = await createPost(content.value);
-                    window.location.href = `#${id.id}`;
+                    let replyTo = related.value.trim();
+                    let { id } =
+                        replyTo === ""
+                            ? await createPost(content.value)
+                            : await createPost(content.value, replyTo);
+                    window.location.href = `#${id}`;
                 }
                 window.send = send;
 
@@ -47,7 +51,7 @@
                         <div>
                           <button onclick="send()">Send</button>
                           <label>Reply to </label>
-                          <input type="text" id="related" />
+                          <input id="related" type="text" />
                         <div>
                     </div>
                 `;
