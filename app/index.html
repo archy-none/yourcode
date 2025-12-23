@@ -26,7 +26,7 @@
                         <p>${username} - ${formatDate(unixepoc)}</p>
                         <p>
                           <button onclick="likePost('${id}')">Like ${liked}</button>
-                          <span>Reply to <a href="#${related}">${related}</a></span>
+                          ${related != null ? `<span>Reply to <a href="#${related}">${related}</a></span>` : ""}
                         </p>
                     </div>
                 `;
@@ -35,6 +35,7 @@
             function post() {
                 async function send() {
                     let content = document.getElementById("content");
+                    let related = document.getElementById("related");
                     let id = await createPost(content.value);
                     window.location.href = `#${id.id}`;
                 }
@@ -43,7 +44,11 @@
                 return `
                     <div class="post">
                         <textarea id="content"></textarea>
-                        <button onclick="send()">Send</button>
+                        <div>
+                          <button onclick="send()">Send</button>
+                          <label>Reply to </label>
+                          <input type="text" id="related" />
+                        <div>
                     </div>
                 `;
             }
