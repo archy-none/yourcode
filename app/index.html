@@ -59,9 +59,18 @@
             }
 
             const root = document.getElementById("root");
-            viewPost(window.location.hash.substring(1)).then((data) => {
-                root.innerHTML = view(data) + post();
-            });
+            const func = window.location.hash.substring(1);
+            if (func === "timeline") {
+                getTimeline().then((x) => {
+                    root.innerHTML = x.map(view).join("");
+                });
+            } else if (func === "post") {
+                root.innerHTML = post();
+            } else {
+                viewPost(func).then((data) => {
+                    root.innerHTML = view(data);
+                });
+            }
         </script>
     </body>
 </html>
