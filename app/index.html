@@ -42,7 +42,7 @@
             }
 
             function post() {
-                async function send() {
+                window.send = async function () {
                     let content = document.getElementById("content");
                     let related = document.getElementById("related");
                     let replyTo = related.value.trim();
@@ -51,8 +51,7 @@
                             ? await createPost(content.value)
                             : await createPost(content.value, replyTo);
                     window.location.href = `#${ok(res).id}`;
-                }
-                window.send = send;
+                };
 
                 return `
                     <div class="post">
