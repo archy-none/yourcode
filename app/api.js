@@ -1,5 +1,7 @@
+const API_SERVER = "http://localhost:8000";
+
 const signup = async (username, password) => {
-  const response = await fetch("http://localhost:8000/signup/", {
+  const response = await fetch(`${API_SERVER}/signup/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +15,7 @@ const signup = async (username, password) => {
 };
 
 const login = async (username, password) => {
-  const response = await fetch("http://localhost:8000/login/", {
+  const response = await fetch(`${API_SERVER}/login/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +30,7 @@ const login = async (username, password) => {
 };
 
 const logout = async () => {
-  const response = await fetch("http://localhost:8000/logout/", {
+  const response = await fetch(`${API_SERVER}/logout/`, {
     method: "POST",
     credentials: "include",
   });
@@ -36,22 +38,22 @@ const logout = async () => {
 };
 
 const viewPost = async (postId) => {
-  const response = await fetch(`http://localhost:8000/view/${postId}/`);
+  const response = await fetch(`${API_SERVER}/view/${postId}/`);
   return await response.json();
 };
 
 const getTimeline = async (count) => {
-  const response = await fetch(`http://localhost:8000/timeline/${count}/`);
+  const response = await fetch(`${API_SERVER}/timeline/${count}/`);
   return await response.json();
 };
 
 const likePost = async (postId) => {
-  const response = await fetch(`http://localhost:8000/like/${postId}/`);
+  const response = await fetch(`${API_SERVER}/like/${postId}/`);
   return await response.json();
 };
 
 const createPost = async (content, relatedPostId = null) => {
-  const response = await fetch("http://localhost:8000/post/", {
+  const response = await fetch(`${API_SERVER}/post/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -66,7 +68,7 @@ const createPost = async (content, relatedPostId = null) => {
 };
 
 const editPost = async (postId, content, relatedPostId = null) => {
-  const response = await fetch(`http://localhost:8000/edit/${postId}/`, {
+  const response = await fetch(`${API_SERVER}/edit/${postId}/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -81,7 +83,7 @@ const editPost = async (postId, content, relatedPostId = null) => {
 };
 
 const deletePost = async (postId) => {
-  const response = await fetch(`http://localhost:8000/delete/${postId}/`, {
+  const response = await fetch(`${API_SERVER}/delete/${postId}/`, {
     method: "POST",
     credentials: "include",
   });
